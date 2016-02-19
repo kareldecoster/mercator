@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "Compiling the EBB-ADC overlay from .dts to .dtbo"
+dtc -O dtb -o EBB-PRU-ADC-00A0.dtbo -b 0 -@ EBB-PRU-ADC.dts
+
+echo "Building the PRU Clock code"
+pasm -b PRUClock.p
+
+echo "Building the PRU ADC code"
+pasm -b PRUADC.p
+
+echo "Building mercator application"
+make mercator
+
+echo "Installing daemon"
+sudo cp ./mercator /usr/sbin
+sudo cp ./mercatord /etc/init.d/
+mkdir /var/lib/mercator
+mkdir /var/log/mercator

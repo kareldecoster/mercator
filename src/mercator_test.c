@@ -171,12 +171,13 @@ Suite * mpu_suite(void)
 START_TEST(test_mdau_create){
 	int i;
 	i = mdau_create(0, FREQ_76_8kHz, VREF);
-	ck_assert(i==EXIT_FAILURE);
+	ck_assert(i!=EXIT_SUCCESS);
 	i = mdau_create(FRAME_SIZE, FREQ_76_8kHz, 0.0);
-	ck_assert(i==EXIT_FAILURE);
+	ck_assert(i!=EXIT_SUCCESS);
 	i = mdau_create(FRAME_SIZE, FREQ_76_8kHz,VREF);
 	ck_assert(i==EXIT_SUCCESS);
-	mdau_destroy();
+	i=mdau_destroy();
+	ck_assert(i==EXIT_SUCCESS);
 }
 END_TEST
 
@@ -217,4 +218,3 @@ int main(void)
 	
 	return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
-

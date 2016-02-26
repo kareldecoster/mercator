@@ -23,7 +23,7 @@
 
 #define FRAME_SIZE 1024
 #define PHI (300.0/76800.0)	/*Lowest emited frequency deviced by the sampling frequency*/
-#define VREF 3.3
+#define VREF 2.5
 
 volatile sig_atomic_t done = 0;
 

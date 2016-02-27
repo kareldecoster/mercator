@@ -53,10 +53,11 @@ You can now check weither the DTO is loaded by executing
       $ cat /sys/devices/bone_capemgr.9/slots
 
 The result should look similar to this:
+
        0: 54:PF--- 
        1: 55:PF--- 
        2: 56:PF--- 
-       3: 57:PF--- 
+       3: 57:PF---
        4: ff:P-O-L Bone-LT-eMMC-2G,00A0,Texas Instrument,BB-BONE-EMMC-2G
        5: ff:P-O-- Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
        6: ff:P-O-- Bone-Black-HDMIN,00A0,Texas Instrument,BB-BONELT-HDMIN

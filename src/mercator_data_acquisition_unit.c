@@ -87,8 +87,6 @@ unsigned int mdau_create(uint32_t frame_size, FREQUENCY_t sampling_frequency, do
 		exit(EXIT_FAILURE);
 	}
 	unsigned int exit_state = EXIT_SUCCESS;
-	//Load the Device Tree Overlay.
-	system("echo EBB-PRU-ADC>/sys/devices/bone_capemgr.9/slots");
 	
 	if(vref<=0.0||frame_size<8){
 		return EXIT_FAILURE;
@@ -96,7 +94,14 @@ unsigned int mdau_create(uint32_t frame_size, FREQUENCY_t sampling_frequency, do
 	VREF = vref;
 	
 	//Resize the default allocated shared memory to fit frame_size.
-	system("rmmod uio_pruss");
+	FILE *fd = popen("lsmod | grep uio_pruss", "r");
+
+	char buf[16];
+	if (fread (buf, 1, sizeof (buf), fd) > 0) {// if there is some result the module must be loaded
+		printf ("module is loaded\n");
+		system("rmmod uio_pruss");
+	}
+	pclose(fd);
 	char modprobe_cmd[80];
 	if(0 == sprintf(modprobe_cmd, "modprobe uio_pruss extram_pool_sz=%#x",2*frame_size)){
 		return EXIT_FAILURE;
@@ -219,6 +224,5 @@ double* mdau_wait_frame(){
     close(fd);
     return samples;
 }
-
 
 

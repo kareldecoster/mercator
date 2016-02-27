@@ -8,6 +8,7 @@ It requires the fftw library, available from http://www.fftw.org/
 
 The Device Three Overlay EBB-PRU-ADC should be compiled and loaded on your BeagleBone.
 The building is included in ./build. It can allso be achieved by executing 
+
       $ dtc -O dtb -o EBB-PRU-ADC-00A0.dtbo -b 0 -@ EBB-PRU-ADC.dts
 
 You should place EBB-PRU-ADC-00A0.dtbo in /lib/firmware so the system can find this overlay.
@@ -19,31 +20,36 @@ There should be a line like :
       ##Disable HDMI (v3.8.x)
       #cape_disable=capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN
 
-to disable it, remove the #.
-      
+to disable it, remove the #.:
+
       ##Disable HDMI (v3.8.x)
       cape_disable=capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN
   
 If you have another version there should be a similar example available in this file.
 
 Now you can load the DTO:
+
       # echo EBB-PRU-ADC > /sys/devices/bone_capemgr.9/slots
 
 To enable the DTO being loaded at boot, edit /boot/uEnv.txt. You should find an example like :
+
       ##Example v3.8.x
       #cape_disable=capemgr.disable_partno=
       #cape_enable=capemgr.enable_partno=
   
 Add the DTO here:
+
       ##Example v3.8.x
       #cape_disable=capemgr.disable_partno=
       cape_enable=capemgr.enable_partno=EBB-PRU-ADC
 
 When adding a custom DTO to this file, you should allso add that DTO to /etc/default/capemgr
 Add the following line.
+
       CAPE=EBB-PRU-ADC
 
 You can now check weither the DTO is loaded by executing
+
       $ cat /sys/devices/bone_capemgr.9/slots
 
 The result should look similar to this:

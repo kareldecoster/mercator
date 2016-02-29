@@ -12,7 +12,7 @@
 #define Y_3 0.75
 
 #define AREA 0.00000702
-#define AMP_GAIN 52745.8
+#define AMP_GAIN 251000//52745.8
 #define SENSITIVITY 1.683 
 
 #define NUM_LEDS 4

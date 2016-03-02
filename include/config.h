@@ -16,6 +16,6 @@
 #define SENSITIVITY 1.683 
 
 #define NUM_LEDS 4
-#define H 1.5
+#define H 1.22
 
 #endif

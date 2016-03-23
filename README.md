@@ -62,3 +62,21 @@ The result should look similar to this:
        5: ff:P-O-- Bone-Black-HDMI,00A0,Texas Instrument,BB-BONELT-HDMI
        6: ff:P-O-- Bone-Black-HDMIN,00A0,Texas Instrument,BB-BONELT-HDMIN
        7: ff:P-O-L Override Board Name,00A0,Override Manuf,EBB-PRU-ADC
+
+To make the service start on boot add the following line to /etc/rc.local
+
+      service mercatord start
+      
+Running:
+
+      # service mercatord status
+      
+After booting should return status = active
+
+      mercatord.service - LSB: Calculates and posts current position from acquired raw sensor data from an MCP3008 adc over SPI.
+        Loaded: loaded (/etc/init.d/mercatord)
+        Active: active (running) since Wed, 23 Mar 2016 14:55:21 +0000; 1s ago
+       Process: 3809 ExecStop=/etc/init.d/mercatord stop (code=exited, status=0/SUCCESS)
+       Process: 4561 ExecStart=/etc/init.d/mercatord start (code=exited, status=0/SUCCESS)
+        CGroup: name=systemd:/system/mercatord.service
+      	  └ 4566 /usr/sbin/mercator --options args
